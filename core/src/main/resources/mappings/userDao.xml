@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.modules.user.dao.UserDao">
+
+    <sql id="userColumns">
+        u.id,
+        u.name,
+        u.login_name,
+        u.password,
+        u.salt
+    </sql>
+
+    <select id="getUserByLoginName" parameterType="String" resultType="User">
+        select
+            <include refid="userColumns"/>
+        from sys_user u
+        where u.login_name = #{loginName}
+    </select>
+
+</mapper>

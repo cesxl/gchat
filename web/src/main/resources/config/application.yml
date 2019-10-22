@@ -1,0 +1,93 @@
+productName: GChat Demo
+
+server:
+  port: 8082
+  servlet:
+    context-path: /gchat
+  tomcat:
+    uri-encoding: UTF-8
+
+jdbc:
+  type: mysql
+  driver: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://127.0.0.1:3306/gchat?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+  username: root
+  password: root
+  testSql: SELECT 1
+
+  pool:
+    init: 1
+    minIdle: 3
+    maxActive: 20
+    maxWait: 60000
+    testOnBorrow: false
+    testOnReturn: false
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 1200000
+    maxEvictableIdleTimeMillis: 1800000
+    removeAbandoned: false
+    removeAbandonedTimeout: 2100
+
+spring:
+  # 打印横幅
+  main:
+    bannerMode: "console"
+    allow-bean-definition-overriding: true
+
+  # 模板引擎
+  freemarker:
+    suffix: .ftl
+    templateLoaderPath: classpath:/templates/
+    charset: UTF-8
+    content-type: text/html;charset=UTF-8
+    cache: false
+    expose-session-attributes: true
+    expose-request-attributes: true
+    expose-spring-macro-helpers: true
+    request-context-attribute: request
+    allow-request-override: true
+    allow-session-override: true
+
+    settings:
+      template_update_delay: 0
+      default_encoding: UTF-8
+      locale: zh_CN
+      boolean_format: true,false
+      number_format: 0.##
+
+mybatis:
+  scanBasePackage: com.demo
+  typeAliasesPackage: com.demo
+  mapperLocations: classpath*:/mappings/**/*.xml
+  configLocation: classpath:/mybatis/mybatis-config.xml
+  databaseId:
+    SQL\ Server: sqlserver
+    DB2: db2
+    Oracle: oracle
+    MySQL: mysql
+    H2: h2
+    PostgreSQL: postgresql
+    DM\ DBMS: dm
+
+shiro:
+  loginUrl: /login
+  logoutUrl: ${shiro.loginUrl}
+  successUrl: /index
+
+  filterChainDefinitions: |
+    /search/** = anon
+    /static/** = anon
+    /login = authc
+    /logout = logout
+    /** = user
+
+  session:
+    sessionTimeout: 1800000
+    sessionTimeoutClean: 1200000
+    sessionIdCookieName: gchat.session.id
+    sessionIdCookiePath: ${server.servlet.context-path}
+
+solr:
+  url: http://127.0.0.1:8983/solr/blog
+  user: solr
+  password: SolrRocks
