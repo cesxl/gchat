@@ -1,6 +1,6 @@
 package com.demo.autoconfigure;
 
-import com.demo.common.config.ErrorPageConfig;
+import com.demo.modules.config.ErrorPageConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

@@ -44,8 +44,7 @@
             <div class="col-sm-10 col-sm-offset-1">
                 <div class="login-container">
                     <div class="center">
-                        <#--<h1> <span class="white" id="id-text2">${Global.getConfig('productName')}</span> </h1>
-                        <h4 class="blue" id="id-company-text"> ${Global.getConfig('version')}</h4>-->
+                        <h1> <span class="white" id="id-text2">${Global.getConfig('productName')}</span> </h1>
                     </div>
                     <div class="space-6"></div>
                     <div class="position-relative">

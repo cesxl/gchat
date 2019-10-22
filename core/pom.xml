@@ -208,6 +208,13 @@
             <version>${jodd-http.version}</version>
         </dependency>
 
+        <!-- Swagger API -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+
     </dependencies>
 
 </project>

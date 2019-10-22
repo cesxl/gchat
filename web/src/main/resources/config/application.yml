@@ -75,6 +75,7 @@ shiro:
   successUrl: /index
 
   filterChainDefinitions: |
+    /api/** = anon
     /search/** = anon
     /static/** = anon
     /login = authc

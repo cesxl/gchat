@@ -1,4 +1,4 @@
-package com.demo.common.config;
+package com.demo.modules.config;
 
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.ErrorPageRegistrar;

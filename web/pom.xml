@@ -14,7 +14,9 @@
 
     <properties>
         <finalName>gchat</finalName>
+        <jjwt.version>0.9.1</jjwt.version>
     </properties>
+
 
     <dependencies>
 
@@ -30,6 +32,12 @@
             <groupId>com.demo</groupId>
             <artifactId>gchat-core</artifactId>
             <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
         </dependency>
 
     </dependencies>

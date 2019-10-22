@@ -3,4 +3,5 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.demo.autoconfigure.DataSourceAutoConfiguration,\
 com.demo.autoconfigure.MybatisAutoConfiguration,\
 com.demo.autoconfigure.ShiroAutoConfiguration,\
-com.demo.autoconfigure.WebMvcAutoConfiguration
+com.demo.autoconfigure.WebMvcAutoConfiguration,\
+com.demo.autoconfigure.FreeMarkerAutoConfiguration
