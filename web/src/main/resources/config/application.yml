@@ -1,4 +1,4 @@
-productName: GChat Demo
+productName: Spring Boot Demo
 
 server:
   port: 8082

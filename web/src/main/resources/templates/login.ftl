@@ -51,7 +51,7 @@
                         <div id="login-box" class="login-box visible widget-box no-border">
                             <div class="widget-body">
                                 <div class="widget-main">
-                                    <h4 class="header blue lighter bigger"> <i class="ace-icon fa fa-coffee green"></i> 请输入账户名/密码 </h4>
+                                    <h4 class="header blue lighter bigger"> <i class="ace-icon green glyphicon glyphicon-user"></i> 请输入账户名/密码 </h4>
                                     <div class="space-6"></div>
                                     <form id="loginForm" action="${ctx}/login" method="post">
                                         <div id="messageBox" class="alert alert-error ${message!'hide'}"><button data-dismiss="alert" class="close">×</button>
