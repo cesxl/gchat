@@ -1,6 +1,5 @@
 package com.demo.modules.solr.web;
 
-import com.alibaba.druid.util.Base64;
 import com.alibaba.fastjson.JSON;
 import com.demo.modules.solr.service.IndexService;
 import com.demo.modules.solr.util.FacetConfig;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /**
@@ -44,18 +42,6 @@ public class IndexController {
     private String solrUser;
     @Value("${solr.password}")
     private String solrPasswd;
-
-    /**
-     * Basic Authentication
-     *
-     * @return String
-     * @throws UnsupportedEncodingException
-     * @see <a href="https://lucene.apache.org/solr/guide/8_1/basic-authentication-plugin.html#basic-authentication-plugin"></a>
-     */
-    private String basicAuth() throws UnsupportedEncodingException {
-        String userPass = solrUser + ":" + solrPasswd;
-        return Base64.byteArrayToBase64(userPass.getBytes("UTF-8"));
-    }
 
     /**
      * standard query parser
@@ -108,13 +94,14 @@ public class IndexController {
         String apiPath = "/suggest";
 
         final HttpResponse response = HttpRequest.get(solrUrl + apiPath)
-                .header("Authorization", "Basic " + basicAuth())
-                .header("User-Agent", "Solr[" + IndexController.class.getName() + "] 1.0")
                 .query("suggest", "true")
                 .query("suggest.build", "false")
                 .query("suggest.count", "5")
                 .query("suggest.dictionary", dictionary)
                 .query("suggest.q", q)
+                .header("User-Agent", "Solr[" + IndexController.class.getName() + "] 1.0")
+                //.header("Authorization", "Basic " + basicAuth())
+                .basicAuthentication(solrUser, solrPasswd)
                 .contentTypeJson().timeout(5000).send();
         response.charset("UTF-8");
         return JSON.parseObject(response.bodyText(), Map.class);
