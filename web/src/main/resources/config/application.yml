@@ -1,4 +1,5 @@
 productName: Spring Boot Demo
+version: 1.0-SNAPSHOT
 
 server:
   port: 8082
