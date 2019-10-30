@@ -32,7 +32,7 @@ jdbc:
 spring:
   # 打印横幅
   main:
-    bannerMode: "console"
+    bannerMode: "off" #console
     allow-bean-definition-overriding: true
 
   # 模板引擎
@@ -93,3 +93,6 @@ solr:
   url: http://127.0.0.1:8983/solr/blog
   user: solr
   password: SolrRocks
+
+logging:
+  config: classpath:config/logback-spring.xml
