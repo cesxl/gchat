@@ -26,7 +26,7 @@ import java.util.List;
  * @author gc
  */
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc
 public class WebMvcAutoConfiguration implements WebMvcConfigurer {
 
     private static final Logger logger = LoggerFactory.getLogger(WebMvcAutoConfiguration.class);
