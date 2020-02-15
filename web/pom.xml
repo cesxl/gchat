@@ -14,9 +14,12 @@
 
     <properties>
         <finalName>gchat</finalName>
+
+        <!-- The main class to start by executing java -jar -->
+        <start-class>com.demo.modules.Application</start-class>
+
         <jjwt.version>0.9.1</jjwt.version>
     </properties>
-
 
     <dependencies>
 
@@ -24,7 +27,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
 
         <!-- 核心模块 -->
@@ -45,8 +48,8 @@
     <build>
         <finalName>${finalName}</finalName>
         <outputDirectory>${project.basedir}/target/classes/</outputDirectory>
-        <plugins>
 
+        <plugins>
             <!-- Spring Boot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -68,8 +71,39 @@
                     </archive>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>docker</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.spotify</groupId>
+                        <artifactId>docker-maven-plugin</artifactId>
+                        <version>1.2.2</version>
+                        <configuration>
+                            <dockerHost>http://192.168.0.110:2375</dockerHost>
+                            <imageName>${project.groupId}/${project.build.finalName}:${project.version}</imageName>
+                            <dockerDirectory>${project.basedir}/bin/docker</dockerDirectory>
+                            <resources>
+                                <resource>
+                                    <targetPath>/</targetPath>
+                                    <directory>${project.build.directory}</directory>
+                                    <include>${project.build.finalName}.war</include>
+                                </resource>
+                            </resources>
+                            <imageTags>
+                                <imageTag>${project.version}</imageTag>
+                            </imageTags>
+                            <forceTags>true</forceTags>
+                            <pushImage>false</pushImage>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

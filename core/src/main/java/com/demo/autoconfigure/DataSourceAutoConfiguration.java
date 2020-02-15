@@ -3,11 +3,14 @@ package com.demo.autoconfigure;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.demo.common.properties.DruidProperties;
 import com.demo.common.properties.JdbcProperties;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -30,16 +33,31 @@ public class DataSourceAutoConfiguration {
         this.jdbcProperties = jdbcProperties;
     }
 
+    @Autowired
+    private Environment environment;
+
     @Bean
     @ConditionalOnMissingBean({DataSource.class})
     public DruidDataSource createDruidDataSource() throws SQLException {
         DruidDataSource dataSource = new DruidDataSource();
 
-        // jdbc
-        dataSource.setDriverClassName(jdbcProperties.getDriver());
-        dataSource.setUrl(jdbcProperties.getUrl());
-        dataSource.setUsername(jdbcProperties.getUsername());
-        dataSource.setPassword(jdbcProperties.getPassword());
+        // docker environment
+        String jdbcDriver = environment.getProperty("jdbc.driver");
+        String jdbcUrl = environment.getProperty("jdbc.url");
+        String jdbcUsername = environment.getProperty("jdbc.username");
+        String jdbcPassword = environment.getProperty("jdbc.password");
+
+        if (StringUtils.isNotBlank(jdbcDriver)) {
+            dataSource.setDriverClassName(jdbcDriver);
+            dataSource.setUrl(jdbcUrl);
+            dataSource.setUsername(jdbcUsername);
+            dataSource.setPassword(jdbcPassword);
+        } else {
+            dataSource.setDriverClassName(jdbcProperties.getDriver());
+            dataSource.setUrl(jdbcProperties.getUrl());
+            dataSource.setUsername(jdbcProperties.getUsername());
+            dataSource.setPassword(jdbcProperties.getPassword());
+        }
 
         // jdbc
         dataSource.setInitialSize(druidProperties.getInit());

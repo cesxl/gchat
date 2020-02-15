@@ -54,39 +54,13 @@
     </dependencies>
 
     <build>
-
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <showWarnings>true</showWarnings>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <addMavenDescriptor>false</addMavenDescriptor>
-                    </archive>
-                </configuration>
-                <executions>
-                    <execution>
-                        <configuration>
-                            <archive>
-                                <manifest>
-                                    <!-- Add directory entries -->
-                                    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                                    <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-                                    <addClasspath>true</addClasspath>
-                                </manifest>
-                            </archive>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
 
             <!-- resource插件 -->
@@ -105,12 +79,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
-            </plugin>
-
-            <!-- ant插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
             </plugin>
 
             <!-- dependency插件 -->
@@ -134,7 +102,6 @@
         </plugins>
 
         <pluginManagement>
-
             <plugins>
                 <!-- 打包插件, war包名称不带版本号 -->
                 <plugin>
@@ -159,15 +126,10 @@
                             <goals>
                                 <goal>jar</goal>
                             </goals>
-                            <configuration>
-                                <doclint>none</doclint>
-                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
-
             </plugins>
-
         </pluginManagement>
 
         <!-- 资源文件配置 -->
@@ -180,12 +142,23 @@
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>rebel.xml</exclude>
-                </excludes>
             </resource>
         </resources>
-
     </build>
+
+    <repositories>
+        <repository>
+            <id>aliyun-repos</id>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>false</enabled></snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>aliyun-repos</id>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>
