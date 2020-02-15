@@ -88,7 +88,7 @@ public class FreeMarkerAutoConfiguration {
      */
     public Map properties() {
         Map<Object, Object> map = Maps.newHashMap();
-        Properties properties = PropertiesUtils.readProperties("config/", "freemarker.properties");
+        Properties properties = PropertiesUtils.readProperties("config", "freemarker.properties");
         Set<String> keys = properties.stringPropertyNames();
         for (String key : keys) {
             map.put(key, staticModel(properties.getProperty(key)));
