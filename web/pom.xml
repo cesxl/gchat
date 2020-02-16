@@ -84,21 +84,24 @@
                         <artifactId>docker-maven-plugin</artifactId>
                         <version>1.2.2</version>
                         <configuration>
+                            <serverId>docker-harbor</serverId>
                             <dockerHost>http://192.168.0.110:2375</dockerHost>
-                            <imageName>${project.groupId}/${project.build.finalName}:${project.version}</imageName>
+                            <!-- docker push {Harbor 地址}:{端口}/{项目名}/{自定义镜像名}:{tag} -->
+                            <registryUrl>192.168.0.110:8089</registryUrl>
+                            <imageName>192.168.0.110:8089/gchat/${project.build.finalName}:${project.version}</imageName>
                             <dockerDirectory>${project.basedir}/bin/docker</dockerDirectory>
                             <resources>
                                 <resource>
                                     <targetPath>/</targetPath>
                                     <directory>${project.build.directory}</directory>
                                     <include>${project.build.finalName}.war</include>
-                                </resource>
+                                </resource>f
                             </resources>
                             <imageTags>
                                 <imageTag>${project.version}</imageTag>
                             </imageTags>
                             <forceTags>true</forceTags>
-                            <pushImage>false</pushImage>
+                            <pushImage>true</pushImage>
                         </configuration>
                     </plugin>
                 </plugins>

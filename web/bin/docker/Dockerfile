@@ -19,3 +19,5 @@ ENTRYPOINT java -cp /opt/gchat $JAVA_OPTS org.springframework.boot.loader.WarLau
 #    --env jdbc.driver="com.mysql.cj.jdbc.Driver" \
 #    --env jdbc.url="jdbc:mysql://127.0.0.1:3306/gchat?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai" \
 #    com.demo/gchat:1.0-SNAPSHOT
+
+# mvn clean package docker:build -Dmaven.test.skip=true -U -Pdocker
