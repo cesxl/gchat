@@ -37,10 +37,28 @@
             <version>${project.parent.version}</version>
         </dependency>
 
+        <!-- jwt -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>${jjwt.version}</version>
+        </dependency>
+
+        <!-- websocket -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-websocket</artifactId>
+            <version>9.0.30</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.websocket</groupId>
+            <artifactId>javax.websocket-api</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
     </dependencies>
@@ -86,7 +104,6 @@
                         <configuration>
                             <serverId>docker-harbor</serverId>
                             <dockerHost>http://192.168.0.110:2375</dockerHost>
-                            <!-- docker push {Harbor 地址}:{端口}/{项目名}/{自定义镜像名}:{tag} -->
                             <registryUrl>192.168.0.110:8089</registryUrl>
                             <imageName>192.168.0.110:8089/gchat/${project.build.finalName}:${project.version}</imageName>
                             <dockerDirectory>${project.basedir}/bin/docker</dockerDirectory>

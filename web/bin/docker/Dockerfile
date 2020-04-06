@@ -1,4 +1,4 @@
-FROM maven:3-jdk-8-alpine as MVN_BUILD
+FROM maven:3-jdk-8-alpine
 MAINTAINER "人间春荡荡 <人间春荡荡@126.com>"
 
 WORKDIR /opt/gchat

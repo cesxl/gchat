@@ -25,4 +25,5 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                 .addPathPatterns("/api/**");
 
     }
+
 }
