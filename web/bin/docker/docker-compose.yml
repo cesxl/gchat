@@ -1,22 +1,22 @@
 version: '2.3'
 services:
   mysql:
-    image: mysql:latest
+    image: mysql:5.7.30
     container_name: mysql
-    restart: "no"
+    restart: always
     ports:
-      - "3306:3306"
+      - 3306:3306
     volumes:
-      - /usr/local/mysql/data/:/var/lib/mysql
-      - /usr/local/mysql/my.cnf:/etc/mysql/my.cnf
+      - ./mysql/data/:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
     environment:
       MYSQL_ROOT_PASSWORD: "root"
   gchat:
     image: com.demo/gchat:1.0-SNAPSHOT
     container_name: gchat
-    restart: "no"
+    restart: always
     ports:
-      - "8087:8082"
+      - 8087:8082
     depends_on:
       - mysql
     environment:
@@ -25,3 +25,15 @@ services:
       jdbc.password: "root"
       jdbc.driver: "com.mysql.cj.jdbc.Driver"
       jdbc.url: "jdbc:mysql://mysql:3306/gchat?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai"
+  nginx:
+    image: nginx:1.17.8
+    container_name: nginx
+    restart: always
+    depends_on:
+      - gchat
+    volumes:
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/html:/usr/share/nginx/html
+      - ./nginx/logs:/var/log/nginx
+    ports:
+      - 80:80
