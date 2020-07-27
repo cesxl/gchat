@@ -112,7 +112,7 @@
                                     <targetPath>/</targetPath>
                                     <directory>${project.build.directory}</directory>
                                     <include>${project.build.finalName}.war</include>
-                                </resource>f
+                                </resource>
                             </resources>
                             <imageTags>
                                 <imageTag>${project.version}</imageTag>

@@ -2,6 +2,8 @@ package com.demo.common.utils;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
+import org.apache.shiro.crypto.hash.Hash;
+import org.apache.shiro.crypto.hash.SimpleHash;
 
 public class EncodeUtil {
 
